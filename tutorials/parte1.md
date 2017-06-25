@@ -209,7 +209,15 @@ L'applicazione sviluppata fino a questo punto è disponibile a [questo link](htt
 
 ## L'aspetto conta
 
-La nostra applicazione è funzionante ma poco interessante da un punto di vista grafico. Vediamo come migliorarla 
+La nostra applicazione è funzionante ma poco interessante da un punto di vista grafico. Vediamo come migliorarla da un punto di vista grafico.
+
+Per prima cosa, installiamo `boostrap` nella nostra applicazione, in modo da poter utilizzare i pacchetti css definiti da questo progetto.
+
+```sh
+$ npm install --save bootstrap
+```
+
+Bootstrap è un popolarissimo framework per la cura grafica di applicazioni web. 
 
 ## Fine prima parte
 
