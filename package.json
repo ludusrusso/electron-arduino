@@ -1,0 +1,32 @@
+{
+  "name": "electron-arduino",
+  "version": "0.0.1",
+  "description": "An Electron-based app to control Arduino",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc **.ts",
+    "electron": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludusrusso/electron-arduino.git"
+  },
+  "keywords": [
+    "electron",
+    "arduino"
+  ],
+  "author": "Ludovico O. Russo",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/ludusrusso/electron-arduino/issues"
+  },
+  "homepage": "https://github.com/ludusrusso/electron-arduino#readme",
+  "devDependencies": {
+    "electron-prebuilt-compile": "^1.6.11",
+    "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "arduino-firmata": "^0.3.4"
+  }
+}
