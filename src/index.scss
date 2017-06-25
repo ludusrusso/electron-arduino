@@ -1,0 +1,14 @@
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+
+$primary-color: #00979d;
+
+body {
+    background-color: $primary-color;
+    color: white;
+ 
+    #title_id {
+        text-align: center;
+        font-weight: bold;
+    }
+}
+
