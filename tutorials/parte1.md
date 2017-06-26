@@ -292,9 +292,9 @@ Aggiungiamo, per prima cosa, il link file `index.scss` appena creato, all'intern
 
 Lanciamo l'applicazione, il risultato sarà questo:
 
-![Prima app con grafica]()
+![Prima app con grafica](https://github.com/ludusrusso/electron-arduino/blob/master/img/app_color.png?raw=true)
 
-A questo punto, aggiungiamo un'immagine (figa) per completare l'aspetto della nostra applicazione. Per l'occasione, userò il logo di Arduino (che trovate [qui]()).
+A questo punto, aggiungiamo un'immagine (figa) per completare l'aspetto della nostra applicazione. Per l'occasione, userò il logo di Arduino (che trovate [qui](https://github.com/ludusrusso/electron-arduino/blob/master/img/arduino_white.png?raw=true)).
 
 Creiamo una cartella `src/imgs/` e copiamo al suo interno il logo.
 
