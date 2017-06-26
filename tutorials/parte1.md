@@ -320,6 +320,7 @@ Lanciamo il programma ed otterremo questo risultato:
 
 ![app grafica def](https://github.com/ludusrusso/electron-arduino/blob/master/img/gui_def.png?raw=true)
 
+L'app, sviluppata fino a questo punto, è disponibile [qui](https://github.com/ludusrusso/electron-arduino/tree/5fc13acf71c0c7b9744ca9e7660f5d91cdcb59ab).
 ## Fine prima parte
 
 Come vedete, in questa prima parte abbiamo tirato su, usando Electron e Typescript, una prima applicazione! Nella prossima parte della guida, vedremo come interfacciare Arduino all'app per leggere i dati. 
