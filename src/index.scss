@@ -1,14 +1,14 @@
 @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 
-$primary-color: #00979d;
+$arduino-color: #00979d;
 
 body {
-    background-color: $primary-color;
+    background-color: $arduino-color;
     color: white;
- 
+
     #title_id {
-        text-align: center;
-        font-weight: bold;
+      text-align: center;
+      padding: 30px;
+      font-weight: bold;
     }
 }
-

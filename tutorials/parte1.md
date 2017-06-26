@@ -1,4 +1,4 @@
-# Sviluppiamo un'app in Electron per controllare la scheda Arduino
+# Sviluppiamo un'app in Electron per controllare la scheda Arduino - parte 1
 
 In un mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test-con-typescript-ed-electron) vi ho parlato di come creare una semplicissima applicazione sfruttando Electron e il nuovo linguaggio di programmazione TypeScript. In questo periodo, ho approfondito un po' queste tecnologie, ed oggi vi propongo qui un tutorial completo su come sviluppare un'applicazione in Electron per il controllo di una scheda Arduino connessa via USB al computer su cui gira l'applicazione.
 
@@ -209,7 +209,7 @@ L'applicazione sviluppata fino a questo punto è disponibile a [questo link](htt
 
 ## L'aspetto conta
 
-La nostra applicazione è funzionante ma poco interessante da un punto di vista grafico. Vediamo come migliorarla da un punto di vista grafico.
+La nostra applicazione è funzionante ma poco interessante da un punto di vista grafico. Vediamo come migliorarla.
 
 Per prima cosa, installiamo `boostrap` nella nostra applicazione, in modo da poter utilizzare i pacchetti css definiti da questo progetto.
 
@@ -217,7 +217,88 @@ Per prima cosa, installiamo `boostrap` nella nostra applicazione, in modo da pot
 $ npm install --save bootstrap
 ```
 
-Bootstrap è un popolarissimo framework per la cura grafica di applicazioni web. 
+[Bootstrap](http://getbootstrap.com/) è un popolarissimo framework per la cura grafica di applicazioni web.
+
+Per definire l'aspetto dell'applicazione, inoltre, useremo `scss` (e non direttamente `css`) per definire lo stile. Come per `TypeScript`, electron-compile è in grado di usare direttamente file `.scss`, senza una fase di compilazione per generare `css`.
+
+### file `index.scss`
+Creiamo quindi un file `src/index.scss` e apriamolo per editarlo.
+
+Per prima cosa, importiamo i sorgenti css di bootstrap:
+
+```scss
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+```
+
+Settiamo quindi il colore di backgroud dello sfondo al colore di Arduino (codice `#00979d`) e il colore del testo bianco. Per farlo, definiamo una variabile contenente il codice colori richiesto
+
+```scss
+$arduino-color: #00979d;
+```
+
+e quindi settiamo le proprietà del tag `body`
+
+```scss
+body {
+    background-color: $arduino-color;
+    color: white;
+}
+```
+
+andiamo anche a settare la proprietà del titolo `h1` in modo che il testo sia centrato. Aumentiamo anche il padding e settiamo il font in modo che sia in grassetto (bold). Per farlo, selezioniamo l'emento tramite il suo tag `#title_id`
+
+```scss
+body {
+    // ...
+    #title_id {
+        text-align: center;
+        padding: 30px;
+        font-weight: bold;
+    }
+}
+```
+
+Il file completo avrà quindi questa forma:
+
+```scss
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+
+$arduino-color: #00979d;
+
+body {
+    background-color: $arduino-color;
+    color: white;
+
+    #title_id {
+      text-align: center;
+      padding: 30px;
+      font-weight: bold;
+    }
+}
+```
+### modifichiamo il file `index.html`
+
+
+Per finire, modifichiamo il file `index.html` in modo che usi il file appena implementato.
+
+Aggiungiamo, per prima cosa, il link file `index.scss` appena creato, all'interno del tag `head`:
+
+```html
+    <head>
+        <title>Arduino Electron</title>
+        <link rel="stylesheet" href="./index.scss">
+    </head>
+```
+
+Lanciamo l'applicazione, il risultato sarà questo:
+
+![Prima app con grafica]()
+
+A questo punto, aggiungiamo un'immagine (figa) per completare l'aspetto della nostra applicazione. Per l'occasione, userò il logo di Arduino (che trovate [qui]()).
+
+Creiamo una cartella `src/imgs/` e copiamo al suo interno il logo.
+
+
 
 ## Fine prima parte
 
