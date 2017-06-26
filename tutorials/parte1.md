@@ -316,10 +316,10 @@ A questo punto, uploadiamo il file `index.html` aggiungendo il codice che seguie
 
 In questo modo, abbiamo creato un container bootstrap. All'interno del container troviamo una `row`, con all'interno una colonna con offset: in questo modo, l'immagine non sarà a tutto schermo. Per finire, all'interno della colonna, abbiamo renderizzato l'immagine come classe `img-responsive`, in modo che si adatti automaticamente alle dimensioni della colonna.
 
-Lanciamo il prgroamma ed otterremo questo risultato:
+Lanciamo il programma ed otterremo questo risultato:
 
-![]()
+![app grafica def](https://github.com/ludusrusso/electron-arduino/blob/master/img/gui_def.png?raw=true)
 
 ## Fine prima parte
 
-Come vedete, in questa prima parte abbiamo tirato su, usando Electron e Typescript, un prima applicazione 
+Come vedete, in questa prima parte abbiamo tirato su, usando Electron e Typescript, una prima applicazione! Nella prossima parte della guida, vedremo come interfacciare Arduino all'app per leggere i dati. 
