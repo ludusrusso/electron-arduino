@@ -298,7 +298,27 @@ A questo punto, aggiungiamo un'immagine (figa) per completare l'aspetto della no
 
 Creiamo una cartella `src/imgs/` e copiamo al suo interno il logo.
 
+A questo punto, uploadiamo il file `index.html` aggiungendo il codice che seguie sotto subito dopo il tag `h1`
 
+```html
+    <body>
+      <h1 id="title_id">Funziona</h1>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-4">
+            <img class="img-responsive "src="./imgs/arduino_white.png" alt="Arduino Logo">
+          </div>
+        </div>
+      </div>
+    </body>
+```
+
+In questo modo, abbiamo creato un container bootstrap. All'interno del container troviamo una `row`, con all'interno una colonna con offset: in questo modo, l'immagine non sarà a tutto schermo. Per finire, all'interno della colonna, abbiamo renderizzato l'immagine come classe `img-responsive`, in modo che si adatti automaticamente alle dimensioni della colonna.
+
+Lanciamo il prgroamma ed otterremo questo risultato:
+
+![]()
 
 ## Fine prima parte
 
