@@ -1,15 +1,6 @@
-# Sviluppiamo un'app in Electron per controllare la scheda Arduino
+# Sviluppiamo un'app in Electron per controllare la scheda Arduino - parte 2
 
-In un mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test-con-typescript-ed-electron) vi ho parlato di come creare una semplicissima applicazione sfruttando Electron e il nuovo linguaggio di programmazione TypeScript. In questo periodo, nel tempo libero, ho approfondito un po' queste tecnologie, ed oggi vi propongo qui un tutorial completo su come sviluppare un'applicazione in Electron per il controllo di una scheda Arduino connessa via USB al computer su cui gira l'applicazione.
-
-Il tutorial sarà diviso in due parti:
-
- - Nella prima parte (questa), imposteremo ed entreremo nel dettaglio dell'utilizzo di Electron. Questa parte può quindi essere considerata una versione riveduta e corretta del mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test-con-typescript-ed-electron).
- - Nella seconda parte, ci interfacceremo ad Aruduino da TypeScript.
-
-Questo tutorial si basa sul protocollo **Firmata** e sulla libreria **arduino-firmata** in Node.js. Vedremo nel dettaglio in seguito di cosa parliamo.
-
-In questo tutorial, useremo anche l'interessantissimo progetto [electron-compile](https://github.com/electron/electron-compile), che essenzialmente permette direttamente di utilizzare codice **TypeScritp** (ed altri linguaggi ad alto livello per web) senza doverlo prima compilare.
+Nella precedente parte di questo tutorial, ho fatto vedere come tirare su una semplice applicazione Electron con TypeScript. Vediamo ora come integrare 
 
 ### Il protocollo Firmata
 [**Firmata**](https://github.com/firmata/protocol) è un protocollo pensato per permettere la comunicazione tra un microcontrollore ed un software su un computer. Il protocollo è pensato in modo da poter essere implementato sul firmware di qualsiasi microcontrollore e sul software di un qualsiasi computer. Firmata è già implemetato in Arduino ed è talmente popolare che nelle ultime versioni dell'IDE lo troviamo già disponibile all'installazione. Inoltre, firmata è disponibile su tantissimi linguaggi di programmazione, come Python o javascript in Node.
@@ -22,7 +13,7 @@ Firmata in Arduino può essere usata in due modi diversi:
 
 #### Firmata e Node.js
 
-Come sapete, Node.js è una piattaforma che permette di sviluppare applicaizoni in javascript che girano su un computer (invece che su un browser come normalmente avviene). 
+Come sapete, Node.js è una piattaforma che permette di sviluppare applicaizoni in javascript che girano su un computer (invece che su un browser come normalmente avviene).
 
 Per node, troviamo implementazioni già pronte di Firmata, e tra queste, vi è anche la libreria [arduino-firmata](https://github.com/shokai/node-arduino-firmata) che è già pronta per comunicare con lo schetch **StandardFirmata**.
 
@@ -52,7 +43,7 @@ $ npm install --save arduino-firmata
 ```
 
 
-Alcune note: 
+Alcune note:
 
  - `electron-prebuilt-compile` è una versione precompilata di electron-compile, che ci permette di utilizzarlo esattamente come se fosse electron.
  - `electron-rebuild` è un progetto in grado di rimpilare automaticamente i vari pacchetti installati in base alla versione di Node.js che sta utilizzando electron. Serve in pratica per risolvere conflitti di dipendenze. Qui lo utilizziamo in quanto, almeno sul mio computer, si è verificato un conflitto tra electron e la libreria `serialport`, da cui dipende `arduino-firmata`.
@@ -93,7 +84,7 @@ import {app, BrowserWindow} from 'electron'
 `app` reppresenza l'istanza dell'applicazione che stiamo creando, mentre `BrowserWindow` è una classe necessaria per la creazione di finistre grafiche.
 
 A questo punto, è necessario aspettare che l'applicazione venga correttamente caricata prima di fare qualsiasi operazione. Per farlo, possiamo usare la funzione `app.on`, che crea una callback in base ad alcuni eventi del ciclo vita dell'applicazione. A noi, in particolare, interessa l'evento `ready`, che viene eseguito quando l'app è stata correttamente caricata:
- 
+
 ```typescript
 app.on('ready', () => {
   // codice da implementare
@@ -132,7 +123,7 @@ app.on('ready', () => {
 ```
 
 ### Il file `index.html`
-Mentre il file `app.ts` rimarrà invariato da qui alla fine del tutorial, il file `index.html` sarà un po' più complicato e ci lavoreremo molto. 
+Mentre il file `app.ts` rimarrà invariato da qui alla fine del tutorial, il file `index.html` sarà un po' più complicato e ci lavoreremo molto.
 Per il momento, per arrivare il prima possibile a far girare l'applicazione, sviluppaimo un file più semplice possibile :D
 
 Apriamo il file `index.html` e scriviamo questo codice:
@@ -177,7 +168,7 @@ Una volta salvato il file, lanciamo il comando `npm start` per avviare l'applica
 
 ### Il file `index.ts`
 
-A differenza del file `app.ts`, che serve semplicemente per far partire l'applicazione, il file `index.ts` conterrà l'*intelligenza* dell'applicazione stessa, cioè il codice che ne decide il comportamento. Questo file è separato dal primo in quanto è associato alla finestra della nostra app, e quindi al file `index.html` (non è un caso che entrambi i file abbiano lo stesso nome). 
+A differenza del file `app.ts`, che serve semplicemente per far partire l'applicazione, il file `index.ts` conterrà l'*intelligenza* dell'applicazione stessa, cioè il codice che ne decide il comportamento. Questo file è separato dal primo in quanto è associato alla finestra della nostra app, e quindi al file `index.html` (non è un caso che entrambi i file abbiano lo stesso nome).
 
 In gergo, il file `main.ts` viene chiamato **main process**, mentre il file `index.ts` è detto **render process**.
 
@@ -197,13 +188,13 @@ Come è possibile immaginare, prima di testare l'applicazione, dobbiamo modifica
 
  - Aggiungere l'id *title_id* all'elemento `h1`, modificando la riga corrispondente come segue: `<h1 id="title_id">Funziona</h1>`;
  - Importare lo script `index.ts` alla fine del file, aggiungdo le seguenti linee prima della chiusura del tag `html`:
- 
+
   ```html
     <script>
         require('./index.ts')
     </script>
   ```
-  
+
 Il file `index.html` dovrà quindi avere la seguente forma:
 
 ```html
