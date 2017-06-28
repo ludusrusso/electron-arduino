@@ -561,6 +561,6 @@ E questo è il risultato finale dell'applicazione
 
 ## Conclusioni
 
-Siamo giunti alla fine di questo lungo tutorial. Trovate la versione qui realizzata dell'applicazione a [questo link]().
+Siamo giunti alla fine di questo lungo tutorial. Trovate la versione qui realizzata dell'applicazione a [questo link](https://github.com/ludusrusso/electron-arduino/tree/07c897b1a462baf6e6f22260db730cc9678f7bc3).
 Che dire, mi sto divertendo tantissimo ad usare TypeScript ed Electron, e penso che, con poco effort, si riescano a fare grandi cose.
 Sicuramente approfondirò ancora queste tecnologie!
