@@ -350,7 +350,7 @@ Una volta creato questo oggetto, dobbiamo informare l'oggetto `plotter`, creato 
 plotter.addTimeSeries(plotline);
 ```
 
-Perfetto, ora abbiamo una linea correttamente configurata, ma ancora senza dati. Usiamo l'oggetto `arduino` per inserire i dati a partire dai valori letti dal pin `A0`. Dato che la lettura dei dati deve essere periodica, creiamo, utilizziamo nuovamente la funzione `setInterval`. Come prima, lavoreremo dentro la callback chiamata dell'eventi `connect`.
+Perfetto, ora abbiamo una linea correttamente configurata, ma ancora senza dati. Usiamo l'oggetto `arduino` per inserire i dati a partire dai valori letti dal pin `A0`. Dato che la lettura dei dati deve essere periodica, utilizziamo nuovamente la funzione `setInterval`. Come prima, lavoreremo dentro la callback chiamata dell'eventi `connect`.
 
 ```typescript
 arduino.on('connect', () => {
@@ -365,7 +365,7 @@ arduino.on('connect', () => {
 
 Come vedete, l'oggetto `plotline` presenta un metodo `append`, che vuole due valori: il tempo a cui è stato preso il dato `time`, ed il dato stesso `v`.
 
-Il dato `v` è ottenuto leggendo il pin `A0` di arduino, e normalizzando la lettura nell'intervallo $[0 -- 5]V$. Il dato `time`, invece, viene ottenuto pendendo il tempo del sistema nel momento in cui è eseguita la funzione, utilizzando l'oggetto Date().
+Il dato `v` è ottenuto leggendo il pin `A0` di arduino, e normalizzando la lettura nell'intervallo $[0 -- 5]V$. Il dato `time`, invece, viene ottenuto pendendo il tempo del sistema nel momento in cui è eseguita la funzione, utilizzando l'oggetto `Date()``.
 
 ```typescript
 let v = arduino.analogRead(0)*5.0/1023;
@@ -417,12 +417,12 @@ arduino.on('connect', () => {
 Lanciamo l'applicazione, e vedremo finalmente il grafico apparire all'interno dell'aria dedicata.
 Se non collegate niente al pin `A0`, noterete un segnale molto casuale, come quello mostrato qui sotto
 
-![Circuito Random](https://raw.githubusercontent.com/ludusrusso/electron-arduino/master/img/appv2random.png)
+![Circuito Random](https://raw.githubusercontent.com/ludusrusso/electron-arduino/master/img/appv2.png)
 
 Ho anche provato a realizzare un semplicissimo circuito RC, la cui uscita è stata collegata al pin `A0`. Il tutto sembra funzionare come previsto!
 Si noti che ho sfruttato il Pin 13 (che continua a blinkare), per controllare la carica e scarica del condensatore nel circuito.
 
-![Circuito RC plot](https://raw.githubusercontent.com/ludusrusso/electron-arduino/master/img/appv2.png)
+![Circuito RC plot](https://raw.githubusercontent.com/ludusrusso/electron-arduino/master/img/appv2RC.png)
 
 ![Circuito RC](https://raw.githubusercontent.com/ludusrusso/electron-arduino/master/img/circuito.png)
 
@@ -487,8 +487,7 @@ body {
 
 Per finire, settiamo alcune configurazione agli oggetti `plotter` e `plotline` nel file `index.html`.
 
-Per prima cosa, fissiamo l'asse verticale del grafico a valori fissi, ed (in particolare).
-In particolare fisserò il valore inferiore a $-0.1$ e quello superiore a $5.1$. Questo si fa
+Per prima cosa, fissiamo l'asse verticale del grafico a valori fissi: in particolare fisserò il valore inferiore a $-0.1$ e quello superiore a $5.1$. Questo si fa
 passando i valiri `minValue` e `maxValue` al costruttore `SmoothieChart`.
 
 ```typescript
