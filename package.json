@@ -5,7 +5,8 @@
   "main": "src/app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "rebuild": "electron-rebuild ."
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/ludusrusso/electron-arduino#readme",
   "devDependencies": {
     "electron-prebuilt-compile": "^1.6.11",
+    "electron-rebuild": "^1.5.11",
     "typescript": "^2.3.4"
   },
   "dependencies": {
