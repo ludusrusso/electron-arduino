@@ -28,7 +28,9 @@
     "typescript": "^2.3.4"
   },
   "dependencies": {
+    "@types/smoothie": "^1.25.29",
     "arduino-firmata": "^0.3.4",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "smoothie": "^1.29.1"
   }
 }
