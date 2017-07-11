@@ -5,11 +5,11 @@ In un mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test
 Il tutorial sarà diviso in due parti:
 
  - Nella prima parte (questa), imposteremo ed entreremo nel dettaglio dell'utilizzo di Electron. Questa parte può quindi essere considerata una versione riveduta e corretta del mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test-con-typescript-ed-electron).
- - Nella seconda parte, ci interfacceremo ad Arduino da TypeScript, e svilupperemo una semplice (ma efficate ed estendibile) interfaccia di controllo per Arduino.
+ - Nella seconda parte, ci interfacceremo ad Arduino da TypeScript, e svilupperemo una semplice (ma efficace ed estendibile) interfaccia di controllo per Arduino.
 
 Questo tutorial si basa sul protocollo **Firmata** e sulla libreria **arduino-firmata** in Node.js. Vedremo nel dettaglio in seguito di cosa parliamo.
 
-In questo tutorial, useremo anche l'interessantissimo progetto [electron-compile](https://github.com/electron/electron-compile), che essenzialmente permette direttamente di utilizzare codice **TypeScritp** (ed altri linguaggi ad alto livello per web) senza doverlo prima compilare.
+In questo tutorial useremo anche l'interessantissimo progetto [electron-compile](https://github.com/electron/electron-compile), che essenzialmente permette direttamente di utilizzare codice **TypeScript** (ed altri linguaggi ad alto livello per web) senza doverlo prima compilare.
 
 ## Creazione del progetto e installazione delle librerie
 
@@ -62,14 +62,14 @@ $ touch app.ts  index.html index.ts
 
 Ad essere onesti, il file `app.ts` deve fare veramente poche operazioni: in particolare, deve creare una finestra grafica (di dimensioni specificate da noi) e renderizzare al suo interno il file `index.html`.
 
-Vediamo quindi come implementare questo semplice codice. Apriamo questo file con un qualsiasi editor di test e iniziamo a scrivere.
+Vediamo quindi come implementare questo semplice codice. Apriamo questo file con un qualsiasi editor di testo e iniziamo a scrivere.
 
-Per prima cosa, importiamo gli oggetti `app` e `BrowserWindow` da `electron`:
+Per prima cosa importiamo gli oggetti `app` e `BrowserWindow` da `electron`:
 
 ```typescript
 import {app, BrowserWindow} from 'electron'
 ```
-`app` reppresenza l'istanza dell'applicazione che stiamo creando, mentre `BrowserWindow` è una classe necessaria per la creazione di finistre grafiche.
+`app` reppresenza l'istanza dell'applicazione che stiamo creando, mentre `BrowserWindow` è una classe necessaria per la creazione di finestre grafiche.
 
 A questo punto, è necessario aspettare che l'applicazione venga correttamente caricata prima di fare qualsiasi operazione. Per farlo, possiamo usare la funzione `app.on`, che crea una callback in base ad alcuni eventi del ciclo vita dell'applicazione. A noi, in particolare, interessa l'evento `ready`, che viene eseguito quando l'app è stata correttamente caricata:
 
@@ -81,7 +81,7 @@ app.on('ready', () => {
 
 Come vedete, il secondo argomento della funzione è un'altra funzione (callback), che verrà eseguita solo quando l'app sarà pronta.
 
-All'interno della callback, creiamo la nostra finestra, usando l'oggetto `BrowserWindow`, dandogli una dimensione di 600x800:
+All'interno della callback creiamo la nostra finestra, usando l'oggetto `BrowserWindow`, dandogli una dimensione di 600x800:
 
 ```typescript
 app.on('ready', () => {
@@ -89,7 +89,7 @@ app.on('ready', () => {
   // codice da implementare
 });
 ```
-Per finire, carichiamo all'interno della finistra il file `index.html`:
+Per finire carichiamo all'interno della finestra il file `index.html`:
 
 ```typescript
 app.on('ready', () => {
@@ -111,8 +111,9 @@ app.on('ready', () => {
 ```
 
 ### Il file `index.html`
+
 Mentre il file `app.ts` rimarrà invariato da qui alla fine del tutorial, il file `index.html` sarà un po' più complicato e ci lavoreremo molto.
-Per il momento, per arrivare il prima possibile a far girare l'applicazione, sviluppaimo un file più semplice possibile :D
+Per il momento, per arrivare il prima possibile a far girare l'applicazione, sviluppiamo un file più semplice possibile :D
 
 Apriamo il file `index.html` e scriviamo questo codice:
 
@@ -127,7 +128,7 @@ Apriamo il file `index.html` e scriviamo questo codice:
 </html>
 ```
 
-In questo file, abbiamo implementato il titolo (*Arduino Electron*) e stampiamo nella finestra, con tag `h1` la stringa *Funziona*.
+In questo file abbiamo implementato il titolo (*Arduino Electron*) e stampiamo nella finestra, con tag `h1` la stringa *Funziona*.
 
 ### Testiamo l'applicazione
 
@@ -135,7 +136,7 @@ Siamo quasi pronti per far partire l'applicazione, un ultimo sforzo è necessari
 
 Apriamo il file `package.json`, e modifichiamo il campo `main`, in modo da settarlo a `src/app.ts`.  In questo modo diremo all'applicazione che lo script principale è questo file.
 
-Inoltre, all'interno del campo `scripts`, settiamo `start` ad `electron .`. In questo modo, informiamo npm, eseguendo il comando `npm start`, dovremmo lanciare electron!
+Inoltre, all'interno del campo `scripts`, settiamo `start` ad `electron .`. In questo modo, informiamo npm che, eseguendo il comando `npm start`, dovremmo lanciare electron!
 
 Possiamo anche rimuovere lo script `test`. Il file dovrebbe apparire come segue:
 
@@ -150,7 +151,7 @@ Possiamo anche rimuovere lo script `test`. Il file dovrebbe apparire come segue:
 }
 ```
 
-Una volta salvato il file, lanciamo il comando `npm start` per avviare l'applicazione. Se tutto va come deve, si aprira la finestra che vedete in figura. Si noti il titolo e il suo contenuto!
+Una volta salvato il file, lanciamo il comando `npm start` per avviare l'applicazione. Se tutto va come deve, si aprirà la finestra che vedete in figura. Si noti il titolo e il suo contenuto!
 
 ![Electron app base](https://github.com/ludusrusso/electron-arduino/blob/master/img/first.png?raw=true)
 
@@ -222,15 +223,17 @@ $ npm install --save bootstrap
 Per definire l'aspetto dell'applicazione, inoltre, useremo `scss` (e non direttamente `css`) per definire lo stile. Come per `TypeScript`, electron-compile è in grado di usare direttamente file `.scss`, senza una fase di compilazione per generare `css`.
 
 ### file `index.scss`
+
 Creiamo quindi un file `src/index.scss` e apriamolo per editarlo.
 
-Per prima cosa, importiamo i sorgenti css di bootstrap:
+Per prima cosa, importiamo i sorgenti css di [Bootstrap](http://getbootstrap.com/):
 
 ```scss
 @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 ```
 
-Settiamo quindi il colore di backgroud dello sfondo al colore di Arduino (codice `#00979d`) e il colore del testo bianco. Per farlo, definiamo una variabile contenente il codice colori richiesto
+Settiamo quindi il colore di background dello sfondo al colore di Arduino (codice `#00979d`) e il colore del testo bianco.
+Per farlo definiamo una variabile contenente il codice colori richiesto
 
 ```scss
 $arduino-color: #00979d;
@@ -276,10 +279,10 @@ body {
     }
 }
 ```
+
 ### modifichiamo il file `index.html`
 
-
-Per finire, modifichiamo il file `index.html` in modo che usi il file appena implementato.
+Per finire modifichiamo il file `index.html` in modo che usi il file appena implementato.
 
 Aggiungiamo, per prima cosa, il link file `index.scss` appena creato, all'interno del tag `head`:
 
@@ -294,11 +297,11 @@ Lanciamo l'applicazione, il risultato sarà questo:
 
 ![Prima app con grafica](https://github.com/ludusrusso/electron-arduino/blob/master/img/app_color.png?raw=true)
 
-A questo punto, aggiungiamo un'immagine (figa) per completare l'aspetto della nostra applicazione. Per l'occasione, userò il logo di Arduino (che trovate [qui](https://github.com/ludusrusso/electron-arduino/blob/master/img/arduino_white.png?raw=true)).
+A questo punto aggiungiamo un'immagine (figa) per completare l'aspetto della nostra applicazione. Per l'occasione userò il logo di Arduino (che trovate [qui](https://github.com/ludusrusso/electron-arduino/blob/master/img/arduino_white.png?raw=true)).
 
 Creiamo una cartella `src/imgs/` e copiamo al suo interno il logo.
 
-A questo punto, uploadiamo il file `index.html` aggiungendo il codice che seguie sotto subito dopo il tag `h1`
+A questo punto uploadiamo il file `index.html` aggiungendo il codice che seguie sotto subito dopo il tag `h1`
 
 ```html
     <body>
@@ -314,7 +317,7 @@ A questo punto, uploadiamo il file `index.html` aggiungendo il codice che seguie
     </body>
 ```
 
-In questo modo, abbiamo creato un container bootstrap. All'interno del container troviamo una `row`, con all'interno una colonna con offset: in questo modo, l'immagine non sarà a tutto schermo. Per finire, all'interno della colonna, abbiamo renderizzato l'immagine come classe `img-responsive`, in modo che si adatti automaticamente alle dimensioni della colonna.
+In questo modo abbiamo creato un container bootstrap. All'interno del container troviamo una `row`, con all'interno una colonna con offset: in questo modo l'immagine non sarà a tutto schermo. Per finire, all'interno della colonna, abbiamo renderizzato l'immagine come classe `img-responsive`, in modo che si adatti automaticamente alle dimensioni della colonna.
 
 Lanciamo il programma ed otterremo questo risultato:
 
@@ -322,6 +325,7 @@ Lanciamo il programma ed otterremo questo risultato:
 
 L'app, sviluppata fino a questo punto, è disponibile [qui](https://github.com/ludusrusso/electron-arduino/tree/5fc13acf71c0c7b9744ca9e7660f5d91cdcb59ab).
 
-## Fine prima parte
+## Fine prima parte
 
-Come vedete, in questa prima parte abbiamo tirato su, usando Electron e Typescript, una prima applicazione! Nella prossima parte della guida, vedremo come interfacciare Arduino all'app per leggere i dati.
+Come vedete, in questa prima parte abbiamo tirato su, usando Electron e Typescript, una prima applicazione!
+Nella prossima parte della guida vedremo come interfacciare Arduino all'app per leggere i dati.
